@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather app</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Viga&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+    <style>
+        .container {
+            width: 900px;
+            background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+            color: #132743;
+        }
+
+        form {
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .current-location {
+            position: fixed;
+            margin-top: -60px;
+            margin-left: 600px;
+        }
+
+        .day {
+            font-size: 18px;
+        }
+
+        .refresh {
+            display: inline;
+        }
+
+        .weather-icon-today {
+            font-size: 60px;
+        }
+
+        .row {
+            margin-top: 50px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        h1,
+        h3,
+        h4 {
+            font-family: 'Viga', sans-serif;
+        }
+
+        .day {
+            font-family: 'Viga', sans-serif;
+        }
+
+        .Highest {
+            font-weight: bold;
+        }
+
+        .Lowest-today {
+            font-weight: lighter;
+        }
+
+        .Lowest {
+            font-weight: normal;
+        }
+
+        .weather-icon {
+            font-size: 32px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/d22e2ff754.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form id="search-form">
+            <input type="text" id="city-input" placeholder="Enter your city here" />
+            <button>Search</button>
+
+        </form><button class="current-location">Current location</button>
+        <h1 id="city">Den Haag</h1>
+        <h4>13th of September 2020</h4>
+        <h3 id="date">Sunday 08:03 PM</h3> <button class="refresh">Refresh</button>
+        <br>
+        <h1><span id="tempToday">
+                19°C
+            </span>
+        </h1>
+        <i class="fas fa-cloud-sun weather-icon-today"></i>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="card" style="width: 9rem">
+                    <div class="card-body">
+                        <h5 class="card-title day">Monday</h5>
+                        <p class="card-text Highest">
+                            19°C
+                            <span class="Lowest">
+                                12°C
+                            </span>
+                        </p>
+                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card" style="width: 9rem">
+                    <div class="card-body">
+                        <h5 class="card-title day">Tuesday</h5>
+                        <p class="card-text Highest">
+                            18°C/<span class="Lowest">12°C</span>
+
+                        </p>
+                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card" style="width: 9rem">
+                    <div class="card-body">
+                        <h5 class="card-title day">Wednesday</h5>
+                        <p class="card-text Highest">
+                            18°C/<span class="Lowest">12°C</span>
+
+                        </p>
+                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card" style="width: 9rem">
+                    <div class="card-body">
+                        <h5 class="card-title day">Thursday</h5>
+                        <p class="card-text Highest">
+                            17°C/<span class="Lowest">12°C</span>
+
+                        </p>
+                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="card" style="width: 9rem">
+                    <div class="card-body">
+                        <h5 class="card-title day">Friday</h5>
+                        <p class="card-text Highest">
+                            17°C/<span class="Lowest">12°C</span>
+                        </p>
+                        <div class="weather-icon"><i class="fas fa-cloud-sun"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="http://"></a>
+
+    <script>
+        alert("Hello");
+        let now = new Date();
+        let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        let day = days[now.getDay()];
+        let hour = now.getHours();
+        let minutes = now.getMinutes();
+        let date = document.querySelector("#date");
+        date.innerHTML = `${day}, ${hour}:${minutes}`;
+
+
+        function showTemperature(response) {
+            console.log(response.data);
+            document.querySelector("#city").innerHTML = response.data.name;
+            document.querySelector("#tempToday").innerHTML = Math.round(response.data.main.temp);
+        }
+
+        function search(event) {
+            event.preventDefault();
+            let apiKey = "5b0bfa960cf8480fafd9ea6aed867930";
+            let city = document.querySelector("#city-input").value;
+            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`; axios.get(apiUrl).then(showTemperature);
+        }
+
+        let searchForm = document.querySelector("#search-form");
+        searchForm.addEventListener("submit", search);
+
+    </script>
+    </div>
+</body>
+
+</html>
