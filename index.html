@@ -11,7 +11,7 @@
 
 
     <style>
-        .container {
+        .app {
             width: 900px;
             background-image: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
             color: #132743;
@@ -71,12 +71,14 @@
         .weather-icon {
             font-size: 32px;
         }
+        .footnote {text-align: center;}
     </style>
     <script src="https://kit.fontawesome.com/d22e2ff754.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="container">
+        <div class="app">
         <form id="search-form">
             <input type="text" id="city-input" placeholder="Enter your city here" />
             <button>Search</button>
@@ -156,8 +158,10 @@
             </div>
         </div>
     </div>
-    <a href="http://"></a>
-
+    <span class="footnote">
+    <a href="https://github.com/Eva-Sophie/weather-app-prototype">Open-source code</a>, by Eva Rüger
+</span> </div>
+   
     <script>
         alert("Hello");
         let now = new Date();
